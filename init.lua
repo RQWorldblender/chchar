@@ -1,0 +1,11 @@
+--print("This file will be run at load time!")
+--minetest.register_chatcommand("chchar"
+--{
+--    params = "[<model_name>] [<costume_name>]",
+--    description = "Set the model and optionally costume name for the current player",
+--    func = function(name, param)
+--        local name = player:get_player_name()
+--        player_api.set_model(player, model_name)
+--    end,
+--}
+--)

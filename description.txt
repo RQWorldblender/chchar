@@ -1,0 +1,1 @@
+Allows players to change the default character model for another one, optionally with different animations.
