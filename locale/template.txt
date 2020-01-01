@@ -1,0 +1,20 @@
+# Template
+
+Raw texture = 
+Name = 
+Author = 
+Change = 
+Page = 
+License = 
+Description =
+Show, list or set player's model =
+The player =
+was not found =
+Unknown command =
+see /help chchar for supported parameters =
+Player model for =
+set to =
+Player model reset to the default. =
+Invalid model =
+Unknown parameter =
+Unknown model =

@@ -1,45 +1,34 @@
-# Change Player Model, a mod for Minetest
+# Change Player Model (chchar), a mod for Minetest
 Allows players to change the default character model for another one, optionally with different animations. While using this mod, skins for the default player model cannot be used unless it is switched back to. Basically a frontend to the built-in player_api mod shipping with Minetest Game.
-Right now, this mod is in the planning and drafting stage. No code has been implemented yet.
+Minetest 5.0.0 or later is required in order to use this mod. No backwards compatibility with older Minetest versions 0.4.16 and 0.4.17 is currently planned.
+As a side bonus, it is possible to create models with collision boxes that are small enough to fit in one node wide tunnels or crevices, which the default player model cannot do.
 
-## Directory structure of this mod
-Note that the media formats represented here can be replaced by any format supported by the Irrlicht engine.
+## Installing models
 
-chchar
-```
-|-- init.lua (required) - Runs when the game loads.
-|-- mod.conf (recommended) - Contains description and dependencies.
-|-- models
-|    |-- <model name> - code name of a model.
-|        |-- model.ini - Information about this model, including name, costumes available, where to play animations, etc.
-|        `-- costumes - Different versions of a model. Can contain alternate versions with different models, textures, and/or sounds.
-|            |-- default - The default costume to load if no alternate versions of a model are available. 
-|                |-- textures (optional)
-|                |   `-- ... any textures or images for the default model.
-|                |-- sounds (optional)
-|                |   `-- ... any sounds for the default model.
-|                |-- model.b3d/model.obj - Model file that will be rendered in-game by default.
-|                `-- icon.png - Image representing this model overall.
-|            |-- <costume name> - Name of an optional costume. It can also be represented by a number, where the ordering is based alphabetically \(a - 0 to z - 25\).
-|                |-- textures (optional)
-|                |   `-- ... any textures or images for the alternate version of this model.
-|                |-- sounds (optional)
-|                |   `-- ... any sounds for the alternate version of this model.
-|                |-- model.b3d/model.obj - Model file that will be rendered in-game for this particular version.
-|                `-- icon.png - Image representing the alternate version of this model.
-|    |-- ... any other models can be added here
-|-- textures - other images used in places such as formspecs. Not part of any model.
-`-- ... any other files or directories
-```
-## Command Help
-* /chchar \[model name\] \[costume name\] - If "default" is specified in place of <model name>, or /chchar is used by itself, it will load the default player model. If nothing is specified for <costume name>, the default costume for the specified model will load.
-What happens during errors:
-    * If no models are found in the models/ directory: Prints a message in its GUI and chat commands about this.
-    * If an invalid model name or costume name is specified (chat command only): Prints an error telling the user about this.
+### Manual addition
 
-* /chchargui - This command brings up the GUI. Useful in case if an inventory mod is not supported.
-
-* /help chchar - Pulls up usage information on how to use /chchar.
+1) Copy your 3D model files to `models`. Only four formats will be accepted by Minetest:
+    * Blitz3D (.b3d)
+    * Quake2 models (.md2)
+    * Maya/Wavefront (.obj)
+    * Microsoft DirectX (.x)
+2) Copy all the textures that each 3D model uses to `textures`.
+3) Create `meta/<name>.txt` with the minimum following fields (separated by new lines):
+    * Model Name
+    * Textures
+4) It is recommended to fill out the rest of these fields for optimal performance:
+    * Animations
+    * Collision Box
+    * Eye Height
 
 ## License
-Change Player Model code is licensed under the GNU LGPL, version 3 or later.
+Change Player Model code is licensed under the GNU GPL, version 3 (it is not yet known whether only under this version or including later ones, so assume only version 3 for now).
+
+### Credits
+
+* Most of this mod's source code is based from [skinsdb](https://github.com/minetest-mods/skinsdb), commit [8054293](https://github.com/minetest-mods/skinsdb/commit/8054293c2c7617c503fc1c15005f74f063e0e71f). As this code is licensed under the GNU GPLv3, the code here is also under that license.
+
+* Some icons used originate from GTK 3.13.2, latest tagged versions at https://gitlab.gnome.org/GNOME/gtk/tree/3.13.2/gtk/stock-icons. As with the rest of that software, the icons used are licensed under the GNU LGPLv2+. They are:
+  * 16/gtk-convert.*
+  * 24/gtk-convert.svg
+  * 24/image-missing.svg
