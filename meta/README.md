@@ -23,6 +23,8 @@ walk_mine = {x = 200, y = 219}
 sit       = {x = 81,  y = 160}
 Formatted version would be: stand:0,79;lay:162,166;walk:168,187;mine:189,198;walk_mine:200,219;sit:81,160
 
+- Visual Size* - A list of 3 points in XYZ order. The Z axis is optional. It allows scaling of models to different sizes other than their original. If this is not specified, models will be displayed at their original size.
+
 - Collision Box* - A list of 2 XYZ coordinates (6 points) in meters relative from the origin of the model. It creates a cube or prism depending on the location of the coordinates. Format is {X1,Y1,Z1,X2,Y2,Z2} Default: {-0.3,0.0,-0.3,0.3,1.7,0.3} (without braces)
 
 - Stepheight* - How fast this model moves on the ground. Default: 0.6

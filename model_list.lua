@@ -65,26 +65,28 @@ for _, fn in pairs(models_dir_list) do
                     print("Found meta file for "..fn)
                     for line in file:lines() do
                         if line:find("name = ") ~= nil then
-                            local data = line:split(" = ")
-                            model_obj:set_meta("name", data[2])
+                            model_obj:set_meta("name", line:split(" = ")[2])
                         elseif line:find("author = ") ~= nil then
-                            local data = line:split(" = ")
-                            model_obj:set_meta("author", data[2])
+                            model_obj:set_meta("author", line:split(" = ")[2])
                         elseif line:find("license = ") ~= nil then
-                            local data = line:split(" = ")
-                            model_obj:set_meta("license", data[2])
+                            model_obj:set_meta("license", line:split(" = ")[2])
                         elseif line:find("animation_speed = ") ~= nil then
-                            local data = line:split(" = ")
-                            model_obj:set_meta("animation_speed", data[2])
+                            model_obj:set_meta("animation_speed", line:split(" = ")[2])
                         elseif line:find("stepheight = ") ~= nil then
-                            local data = line:split(" = ")
-                            model_obj:set_meta("stepheight", data[2])
+                            model_obj:set_meta("stepheight", line:split(" = ")[2])
                         elseif line:find("eye_height = ") ~= nil then
-                            local data = line:split(" = ")
-                            model_obj:set_meta("eye_height", data[2])
+                            model_obj:set_meta("eye_height", line:split(" = ")[2])
                         elseif line:find("collisionbox = ") ~= nil then
-                            local data = line:split(" = ")
-                            model_obj:set_meta("collisionbox", data[2]:split())
+                            model_obj:set_meta("collisionbox", line:split(" = ")[2]:split())
+                        elseif line:find("visual_size = ") ~= nil then
+                            local data = line:split(" = ")[2]:split()
+                            if #data == 3 then
+                                model_obj:set_meta("visual_size", {x = data[1], y = data[2], z = data[3]})
+                            elseif #data == 2 then
+                                model_obj:set_meta("visual_size", {x = data[1], y = data[2], z = data[2]})
+                            elseif #data == 1 then
+                                model_obj:set_meta("visual_size", {x = data[1], y = data[1], z = data[1]})
+                            end
                         elseif line:find("textures = ") ~= nil then
                             local data = line:split(" = ")[2]:split()
                             if #data < 2 then
@@ -114,12 +116,18 @@ for _, fn in pairs(models_dir_list) do
                     model_obj:set_meta("name", table.concat(nameparts, ' '))
                 end
 
+                -- If no name was found, substitute it with the code name
+                if model_obj:get_meta("name") == nil then
+                    model_obj:set_meta("name", name)
+                end
+
                 -- Register model with player_api, excluding the default model
                 if fn ~= "character.b3d" then
                     player_api.register_model(fn, {
                         animation_speed = model_obj:get_meta("animation_speed") or 30,
                         textures = model_obj:get_meta("textures") or {"blank.png"},
                         animations = model_obj:get_meta("animations") or {},
+                        visual_size = model_obj:get_meta("visual_size") or {x = 1, y = 1},
                         collisionbox = model_obj:get_meta("collisionbox") or {-0.3, 0.0, -0.3, 0.3, 1.7, 0.3},
                         stepheight = model_obj:get_meta("stepheight") or 0.6,
                         eye_height = model_obj:get_meta("eye_height") or 1.47,

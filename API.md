@@ -74,6 +74,7 @@ The next metadata keys are filled or/and used interally in chchar framework, som
   - animation_speed* - How many frames per second the animations play. Default: 30
   - textures - A list of all textures that the model uses. It is possible to leave this field blank, but the model will then not have an optimal appearance.
   - animations* - A list of animations that the model will use on certain actions.
+  - visual_size* - A list of 3 points in XYZ order. The Z axis is optional. It allows scaling of models to different sizes other than their original.
   - collisionbox* - A list of 2 XYZ coordinates (6 points) in meters relative from the origin of the model.
   - stepheight* - How fast this model moves on the ground. Default: 0.6
   - eye_height* - How far up the Y-axis in meters the camera will be, in 1st-person view. Default: 1.47
